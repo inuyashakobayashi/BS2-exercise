@@ -1,0 +1,15 @@
+[package]
+name = "spsc"
+version = "0.1.0"
+authors = ["Student <vorname.nachname@hu-berlin.de>"]
+edition = "2024"
+
+[lib]
+name = "spsc"
+
+[dev-dependencies]
+criterion = "0.8"
+
+[[bench]]
+name = "benchmark"
+harness = false

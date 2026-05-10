@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="CargoProjects">
+    <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c6390171-ec15-469a-8f9d-613a42cf7eb6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../../osp/2023/evaluation/3313018_Betriebssysteme1106472_UEbungsgruppendetails.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../osp/2023/evaluation/eindruck_lehrender.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../osp/2023/evaluation/eindruck_lehrender.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../osp/2023/evaluation/eindruck_praktikum.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../osp/2023/evaluation/eindruck_praktikum.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../osp/lab/general/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../osp/lab/general/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../osp/lab/general/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../osp/lab/general/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../osp/lab/general/support.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../osp/lab/general/support.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../osp/lab/inline_asm/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../osp/lab/inline_asm/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../osp/lab/memory/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../osp/lab/memory/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../osp/lab/memory/memory.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../osp/lab/memory/memory.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../osp/lab/prisoners/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../osp/lab/prisoners/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../osp/lab/process/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../osp/lab/process/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../solution/spsc/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../solution/spsc/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../solution/spsc/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../solution/spsc/Cargo.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../solution/spsc/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/../../solution/spsc/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../solution/spsc/benches/benchmark.rs" beforeDir="false" afterPath="$PROJECT_DIR$/../../solution/spsc/benches/benchmark.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../solution/spsc/src/fast.rs" beforeDir="false" afterPath="$PROJECT_DIR$/../../solution/spsc/src/fast.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../solution/spsc/src/slow.rs" beforeDir="false" afterPath="$PROJECT_DIR$/../../solution/spsc/src/slow.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../01-multithreading/assignment/groupchat/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../01-multithreading/assignment/groupchat/Cargo.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../01-multithreading/assignment/groupchat/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../01-multithreading/assignment/groupchat/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../01-multithreading/solution/groupchat/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../01-multithreading/solution/groupchat/Cargo.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../01-multithreading/solution/groupchat/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../01-multithreading/solution/groupchat/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../03-file-recovery/assignment/recovery/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../03-file-recovery/assignment/recovery/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../03-file-recovery/solution/recovery/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../03-file-recovery/solution/recovery/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../03-file-recovery/solution/recovery/restored/1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../../../03-file-recovery/solution/recovery/restored/1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../05-evocore/assignment/evocore/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../05-evocore/assignment/evocore/Cargo.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../05-evocore/assignment/evocore/src/mars/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../05-evocore/assignment/evocore/src/mars/lib.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../05-evocore/solution/evocore/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../05-evocore/solution/evocore/Cargo.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../06-consensus/assignment/consensus/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../06-consensus/assignment/consensus/Cargo.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../06-consensus/assignment/consensus/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../06-consensus/assignment/consensus/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../06-consensus/assignment/consensus/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../06-consensus/assignment/consensus/src/main.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../06-consensus/solution/consensus/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../06-consensus/solution/consensus/Cargo.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../06-consensus/solution/consensus/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../06-consensus/solution/consensus/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../06-consensus/solution/consensus/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../06-consensus/solution/consensus/src/main.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../2020/lectures/#lecture11.lyx#" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="pnu9c9wd" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2XTiWKd9QTUMDz2qJ3ukgKEBRgq" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Cargo.Clean.executor&quot;: &quot;Run&quot;,
+    &quot;Cargo.Run spsc.executor&quot;: &quot;Run&quot;,
+    &quot;Cargo.Run.executor&quot;: &quot;Run&quot;,
+    &quot;Cargo.Test.executor&quot;: &quot;Run&quot;,
+    &quot;Cargo.Update.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.rust.reset.selective.auto.import&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/weber/Repo/sar-teaching/osp2/00-spsc/assignment/spsc&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;org.rust.cargo.project.model.PROJECT_DISCOVERY&quot;: &quot;true&quot;,
+    &quot;org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon&quot;: &quot;&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;language.rust.cargo.check&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RsExternalLinterProjectSettings">
+    <option name="runOnTheFly" value="true" />
+    <option name="tool" value="Clippy" />
+  </component>
+  <component name="RunManager" selected="Cargo.Test">
+    <configuration name="Clean" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
+      <option name="command" value="clean" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs />
+      <option name="emulateTerminal" value="true" />
+      <option name="channel" value="DEFAULT" />
+      <option name="requiredFeatures" value="true" />
+      <option name="allFeatures" value="false" />
+      <option name="withSudo" value="false" />
+      <option name="buildTarget" value="REMOTE" />
+      <option name="backtrace" value="SHORT" />
+      <option name="isRedirectInput" value="false" />
+      <option name="redirectInputPath" value="" />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Run" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+      <option name="command" value="run" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs />
+      <option name="emulateTerminal" value="true" />
+      <option name="channel" value="DEFAULT" />
+      <option name="requiredFeatures" value="true" />
+      <option name="allFeatures" value="false" />
+      <option name="withSudo" value="false" />
+      <option name="buildTarget" value="REMOTE" />
+      <option name="backtrace" value="SHORT" />
+      <option name="isRedirectInput" value="false" />
+      <option name="redirectInputPath" value="" />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
+      <option name="command" value="test" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs />
+      <option name="emulateTerminal" value="true" />
+      <option name="channel" value="DEFAULT" />
+      <option name="requiredFeatures" value="true" />
+      <option name="allFeatures" value="false" />
+      <option name="withSudo" value="false" />
+      <option name="buildTarget" value="REMOTE" />
+      <option name="backtrace" value="SHORT" />
+      <option name="isRedirectInput" value="false" />
+      <option name="redirectInputPath" value="" />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Update" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
+      <option name="command" value="update" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs />
+      <option name="emulateTerminal" value="true" />
+      <option name="channel" value="DEFAULT" />
+      <option name="requiredFeatures" value="true" />
+      <option name="allFeatures" value="false" />
+      <option name="withSudo" value="false" />
+      <option name="buildTarget" value="REMOTE" />
+      <option name="backtrace" value="SHORT" />
+      <option name="isRedirectInput" value="false" />
+      <option name="redirectInputPath" value="" />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Cargo.Clean" />
+      <item itemvalue="Cargo.Run" />
+      <item itemvalue="Cargo.Test" />
+      <item itemvalue="Cargo.Update" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Cargo.Run" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="RustProjectSettings">
+    <option name="toolchainHomeDirectory" value="$USER_HOME$/.cargo/bin" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c6390171-ec15-469a-8f9d-613a42cf7eb6" name="Changes" comment="" />
+      <created>1698659501114</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1698659501114</updated>
+      <workItem from="1698659502291" duration="390000" />
+      <workItem from="1698659912776" duration="640000" />
+      <workItem from="1698664096014" duration="80000" />
+      <workItem from="1698668419447" duration="606000" />
+      <workItem from="1698766661348" duration="596000" />
+      <workItem from="1699543629305" duration="484000" />
+      <workItem from="1730031755177" duration="4959000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
