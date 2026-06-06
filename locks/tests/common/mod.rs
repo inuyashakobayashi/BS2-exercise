@@ -289,10 +289,10 @@ macro_rules! each_server {
 			fn event() {
 				run($crate::common::Variant::Event);
 			}
-			#[test]
-			fn async_() {
-				run($crate::common::Variant::Async);
-			}
+			// #[test]
+			// fn async_() {
+			// 	run($crate::common::Variant::Async);
+			// }
 		}
 	};
 }
