@@ -2,12 +2,11 @@
 //!
 //! # Architecture
 //!
-//! Everything runs in a **single OS thread** driven by `mio::Poll`. The poll
+//! Everything runs in a single OS thread driven by mio::Poll. The poll
 //! object multiplexes the listener socket and every connected client socket
-//! without blocking on any one of them. This is the classic
-//! **event-loop / reactor** pattern:
+//! without blocking on any one of them.
 //!
-//! ```text
+//! ```
 //!   loop {
 //!       poll.poll(&mut events, None);   // block until ≥1 socket is ready
 //!       for event in events {
@@ -21,46 +20,37 @@
 //!
 //! # Non-blocking IO and message fragmentation
 //!
-//! Every socket is registered as **non-blocking**. `mio` guarantees that when
+//! Every socket is registered as non-blocking. mio guarantees that when
 //! a socket is reported as readable, at least one byte is available without
-//! blocking — but *not* that a full newline-terminated message is present.
-//! TCP is a byte stream; a single `send()` by the peer may arrive split across
-//! multiple `recv()` calls (fragmentation), and vice versa.
+//! blocking — but not that a full newline-terminated message is present.
+//! TCP is a byte stream; a single send() by the peer may arrive split across
+//! multiple recv() calls (fragmentation), and vice versa.
 //!
-//! The [`LineFramer`] (from `lib.rs`) handles this transparently:
+//! The LineFramer (from lib.rs) handles this transparently:
 //!
-//! * `refresh()` reads all currently available bytes into an internal buffer.
-//! * `next_line()` returns the next complete line (if one is buffered), or
-//!   `Ok(None)` if a full line has not arrived yet.
-//! * `write()` / `flush_nonblocking()` buffer outgoing bytes and drain the
-//!   buffer to the socket when it reports writeable, tolerating `WouldBlock`.
+//! * refresh() reads all currently available bytes into an internal buffer.
+//! * next_line() returns the next complete line (if one is buffered), or
+//!   Ok(None) if a full line has not arrived yet.
+//! * write() / flush_nonblocking() buffer outgoing bytes and drain the
+//!   buffer to the socket when it reports writeable, tolerating WouldBlock.
 //!
 //! # Blocking on ACQUIRE
 //!
-//! The event loop never actually *blocks* on a single client. Instead, an
+//! The event loop never actually blocks on a single client. Instead, an
 //! ACQUIRE request for a contended lock simply stores the requesting client's
 //! ID in the lock's FIFO waiter queue — no reply is sent yet. When the holder
-//! later sends RELEASE, `promote_and_notify` finds the next waiter, queues a
-//! `GRANTED` response into that client's write buffer, and re-registers its
-//! socket for `WRITABLE` interest so the event loop will flush it.
+//! later sends RELEASE, promote_and_notify finds the next waiter, queues a
+//! GRANTED response into that client's write buffer, and re-registers its
+//! socket for WRITABLE interest so the event loop will flush it.
 //!
 //! # Disconnect handling
 //!
-//! When `refresh()` returns `UnexpectedEof` (or any other IO error),
-//! `disconnect_client` is called. It:
+//! When refresh() returns UnexpectedEof (or any other IO error),
+//! disconnect_client is called. It:
 //!   1. Removes the client from any waiter queue it may be in.
-//!   2. Releases every lock the client held by calling `promote_and_notify` on
-//!      each one, so the next waiter receives its `GRANTED` response.
+//!   2. Releases every lock the client held by calling promote_and_notify on
+//!      each one, so the next waiter receives its GRANTED response.
 //!
-//! # Trade-offs vs. thread server
-//!
-//! + No OS threads beyond one; no Mutex needed; no stack per connection.
-//! + Handles `WouldBlock` on writes correctly (qualifies for the bonus point).
-//! - Control flow is fragmented across the event loop and helper functions;
-//!   each "logical step" of a connection is split across multiple loop iterations.
-//! - All sockets are coupled through the shared loop: a slow client cannot
-//!   starve others (which is a feature), but a bug in one handler can affect
-//!   all connections (which is a risk).
 
 use std::{
 	collections::{HashMap, VecDeque},
@@ -78,10 +68,6 @@ use locklib::{
 
 // ---------------------------------------------------------------------------
 // Token layout
-//
-// mio identifies each registered source by a `Token(usize)`. We reserve
-// Token(0) for the server listener and use Token(slot_idx + 1) for clients,
-// where `slot_idx` is the index into the `ClientSlab`.
 // ---------------------------------------------------------------------------
 
 /// Token reserved for the server's listening socket.
@@ -103,7 +89,7 @@ fn token_to_client_idx(t: Token) -> usize {
 
 /// State of a single named lock.
 struct LockEntry {
-	/// `Some(id)` while held by a client; `None` when free.
+	/// Some(id) while held by a client; None when free.
 	holder: Option<ClientId>,
 	/// FIFO queue of waiting client IDs. The front is the oldest waiter and
 	/// will be granted the lock next (prevents starvation).
@@ -121,7 +107,7 @@ impl LockEntry {
 
 /// Central lock table for the entire server.
 struct LockStore {
-	/// Map from lock name → entry. Entries are created on first access.
+	/// Map from lock name to entry. Entries are created on first access.
 	locks: HashMap<String, LockEntry>,
 }
 
@@ -132,19 +118,15 @@ impl LockStore {
 		}
 	}
 
-	/// Return the entry for `name`, creating it (free, empty queue) if absent.
+	/// Return the entry for name, creating it (free, empty queue) if absent.
 	fn entry(&mut self, name: &str) -> &mut LockEntry {
 		self.locks
 			.entry(name.to_owned())
 			.or_insert_with(LockEntry::new)
 	}
 
-	/// Pop the next waiter from `name`'s queue, set it as the new holder, and
-	/// return its client ID. Returns `None` if the queue is empty (lock freed).
-	///
-	/// There is no mechanism to skip disconnected waiters here because we eagerly
-	/// remove clients from all queues in `disconnect_client` — by the time
-	/// `promote_next` is called, every entry corresponds to a live connection.
+	/// Pop the next waiter from name's queue, set it as the new holder, and
+	/// return its client ID. Returns None if the queue is empty (lock freed).
 	fn promote_next(&mut self, name: &str) -> Option<ClientId> {
 		let entry = self.locks.get_mut(name)?;
 		if let Some(next_id) = entry.waiters.pop_front() {
@@ -165,13 +147,13 @@ impl LockStore {
 struct ClientState {
 	/// Unique connection ID assigned at accept time.
 	id: ClientId,
-	/// Framed non-blocking IO over the raw mio `TcpStream`.
-	/// `LineFramer` handles TCP fragmentation on the read side and
-	/// `WouldBlock`-safe buffered writes on the write side.
+	/// Framed non-blocking IO over the raw mio TcpStream.
+	/// LineFramer handles TCP fragmentation on the read side and
+	/// WouldBlock-safe buffered writes on the write side.
 	framer: LineFramer<net::TcpStream>,
-	/// If `Some(name)`, this client has sent ACQUIRE for `name` but has not
+	/// If Some(name), this client has sent ACQUIRE for name but has not
 	/// yet received a GRANTED reply (the lock was contended). Used to update
-	/// `held` when the waiter is promoted.
+	/// held when the waiter is promoted.
 	waiting_for: Option<String>,
 	/// Names of locks currently held by this client. Used to release them all
 	/// when the client disconnects.
@@ -194,11 +176,6 @@ impl ClientState {
 	}
 
 	/// Append a formatted response to the write buffer.
-	///
-	/// The bytes are not sent immediately — they are flushed later by
-	/// `flush_nonblocking` when the socket reports writeable. This two-phase
-	/// approach is necessary because mio sockets are non-blocking: a write
-	/// might partially succeed and return `WouldBlock`.
 	fn enqueue(&mut self, resp: Response) {
 		// `Write for LineFramer` buffers into an internal `Vec<u8>` — always
 		// succeeds (no IO involved at this point).
@@ -207,13 +184,6 @@ impl ClientState {
 	}
 }
 
-// ---------------------------------------------------------------------------
-// Slab-like client storage
-//
-// We need O(1) lookup by slot index (for Token → client mapping) and O(1)
-// insertion/removal. A `Vec<Option<ClientState>>` acts as a simple slab:
-// each non-None slot holds a live client, and freed slots are reused.
-// ---------------------------------------------------------------------------
 
 /// Simple slab allocator for `ClientState` values.
 ///
@@ -390,7 +360,7 @@ fn main() -> io::Result<()> {
 
 				// Drain all complete lines buffered so far. A single `refresh`
 				// may have pulled in multiple lines (e.g. a pipelined client),
-				// so we loop until `next_line` returns `Ok(None)`.
+				// so loop until `next_line` returns `Ok(None)`.
 				loop {
 					let line_result = if let Some(client) = clients.get_mut(slot_idx) {
 						client.framer.next_line()
@@ -437,16 +407,7 @@ fn main() -> io::Result<()> {
 			}
 		}
 
-		// -----------------------------------------------------------------
-		// Post-event flush sweep
-		//
-		// Some clients may have gotten new data in their write buffers this
-		// iteration (e.g., a promoted waiter that received GRANTED) but their
-		// socket was not in the current event batch. Attempt a non-blocking
-		// flush for all clients that have pending writes; this avoids an extra
-		// poll round-trip for the common case where the socket is immediately
-		// writable.
-		// -----------------------------------------------------------------
+
 		let mut to_disconnect: Vec<(usize, Token)> = Vec::new();
 		let mut to_reregister: Vec<(usize, Token)> = Vec::new();
 
@@ -493,11 +454,7 @@ fn main() -> io::Result<()> {
 // Process one complete request line from a client.
 // ---------------------------------------------------------------------------
 
-/// Parse `line` as a protocol request, update `locks` / `clients` accordingly,
-/// and queue a response into the requesting client's write buffer.
-///
-/// This function is called once per complete line extracted from the framer.
-/// It never blocks or yields — all state changes are synchronous.
+
 fn process_line(
 	slot_idx: usize,
 	_token: Token,
@@ -646,13 +603,6 @@ fn process_line(
 // Promote the next waiter for a lock and queue GRANTED to their connection.
 // ---------------------------------------------------------------------------
 
-/// After a lock is released (or the holder disconnects), this function pops
-/// the front of the waiter queue and sends them `GRANTED`.
-///
-/// If the promoted client's slot is not found (it disconnected between being
-/// enqueued and being promoted), the function loops and tries the next waiter.
-/// This handles the race between disconnect cleanup removing a client from
-/// queues and `promote_and_notify` being called.
 fn promote_and_notify(
 	name: &str,
 	locks: &mut LockStore,
@@ -700,13 +650,6 @@ fn promote_and_notify(
 // Disconnect a client cleanly.
 // ---------------------------------------------------------------------------
 
-/// Remove a client from the poll registry, release all its held locks, and
-/// evict it from any waiter queue it may be in.
-///
-/// This function is called whenever:
-///   - `refresh()` returns `UnexpectedEof` (clean peer close or RST).
-///   - `flush_nonblocking()` returns an IO error (broken pipe etc.).
-///   - `next_line()` returns a framing error.
 fn disconnect_client(
 	slot_idx: usize,
 	_token: Token,

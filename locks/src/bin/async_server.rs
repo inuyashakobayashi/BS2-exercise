@@ -1,10 +1,14 @@
-//! Async/await lock server — not implemented in this submission.
+//! Single-threaded async/await lock server.
 //!
-//! This project implements the thread-based and event-based variants.
-//! The async variant is left as a stub to allow compilation without
-//! async dependencies.
+//! Your job: spawn one task per connection with
+//! [`LocalSpawnExt::spawn_local`] onto a [`LocalPool`].
+
 
 use std::{env, io, net::TcpListener};
+
+// use async_std::net::TcpListener;
+// use futures::executor::LocalPool;
+// use futures::task::LocalSpawnExt;
 
 fn main() -> io::Result<()> {
 	let addr = env::args()
