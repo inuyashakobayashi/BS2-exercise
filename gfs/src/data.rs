@@ -55,6 +55,8 @@ pub enum DataRequest {
 	/// clamped to the chunk's actual length (so an out-of-range request
 	/// yields fewer bytes, or an empty slice, rather than an error), or
 	/// [`DataResponse::NotFound`] if the chunk is absent.
+	// [zh] 【Bonus】我新加的变体：按字节区间读 chunk(原来的 Read 是读整块)。保留 Read
+	// [zh] 不变，纯加法，所以模板自带的 REPL 和原有测试都不受影响。
 	ReadRange {
 		chunk_id: ChunkId,
 		offset: u64,
